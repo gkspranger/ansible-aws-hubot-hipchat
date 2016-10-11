@@ -1,0 +1,7 @@
+---
+
+- hosts: tag_Name_hubot
+  vars_files:
+    - vars/secrets.yml
+  tasks:
+    - debug: msg="hello"
