@@ -1,0 +1,5 @@
+---
+
+cfg_managed: This is a custom file that is managed by Ansible
+
+bot_name: hal
