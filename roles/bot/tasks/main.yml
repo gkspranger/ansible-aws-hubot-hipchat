@@ -9,3 +9,5 @@
     mode=0750
   notify: restart hubot
   with_fileglob: "{{ playbook_dir }}/roles/bot/templates/scripts/*.coffee"
+  tags:
+    - bot_scripts

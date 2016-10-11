@@ -10,6 +10,6 @@
 #
 
 module.exports = (robot) ->
-  robot.hear /hello {{ name }}/i, (res) ->
-    console.log 'Hello! Nice to see you again.'
+  robot.hear /hello @{{ name }}/i, (msg) ->
+    msg.send 'Hello! Nice to see you again.'
     

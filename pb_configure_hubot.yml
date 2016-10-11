@@ -11,7 +11,7 @@
       tags: redis
     - role: hubot
       name: "{{ bot_name }}"
-      adapter: shell
+      adapter: slack
       tags:
         - hubot
     - role: bot
