@@ -1,0 +1,14 @@
+---
+
+- name: hubot vpc subnets
+  ec2_vpc_subnet_facts:
+    aws_access_key: "{{ aws_api_access_key }}"
+    aws_secret_key: "{{ aws_api_secret_access_key }}"
+    region: us-east-1
+    filters:
+      vpc-id: "{{ aws_vpc_id }}"
+  register: aws_vpc_subnets_facts
+
+- name: set vpc subnets fact
+  set_fact:
+    aws_vpc_subnets="{{ aws_vpc_subnets_facts.subnets }}"
