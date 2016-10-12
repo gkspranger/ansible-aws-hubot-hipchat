@@ -1,0 +1,25 @@
+---
+
+- name: hubot vpc
+  ec2_vpc:
+    aws_access_key: "{{ aws_api_access_key }}"
+    aws_secret_key: "{{ aws_api_secret_access_key }}"
+    region: us-east-1
+    state: present
+    cidr_block: 10.10.0.0/16
+    resource_tags:
+      Name: hubot
+    subnets:
+      - cidr: 10.10.1.0/24
+        az: us-east-1b
+        resource_tags: { "Name": "hubot_1b" }
+    internet_gateway: True
+    route_tables:
+      - subnets:
+        - 10.10.1.0/24
+        routes:
+          - dest: 0.0.0.0/0
+            gw: igw
+        resource_tags:
+          Name: hubot
+  register: aws_vpc

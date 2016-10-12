@@ -1,0 +1,14 @@
+---
+  
+- name: add node repository for Node.js 4.0
+  yum: >
+    name=https://rpm.nodesource.com/pub_4.x/el/6/x86_64/nodesource-release-el6-1.noarch.rpm
+    state=present
+
+- name: install needed yum packages
+  yum: >
+    name={{ item }}
+    state=present
+  with_items:
+    - nodejs
+    

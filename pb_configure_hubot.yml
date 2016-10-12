@@ -1,0 +1,28 @@
+---
+
+- hosts: tag_Name_hubot
+  vars_files:
+    - vars/secrets.yml
+  become: True
+  roles:
+    - role: nodejs_4
+      tags: nodejs
+    - role: redis
+      tags: redis
+    - role: hubot
+      name: "{{ bot_name }}"
+      adapter: slack
+      tags:
+        - hubot
+    - role: bot
+      name: "{{ bot_name }}"
+      tags:
+        - bot
+  post_tasks:
+    - name: start services
+      service: >
+        name="{{ item }}"
+        state=started
+      with_items:
+        - redis
+        - hubot

@@ -1,0 +1,25 @@
+---
+
+- name: set random subnet
+  set_fact:
+    prv_subnet="{{ aws_vpc_subnets | random }}"
+
+- name: provision hubot node
+  ec2:
+    aws_access_key: "{{ aws_api_access_key }}"
+    aws_secret_key: "{{ aws_api_secret_access_key }}"
+    region: us-east-1
+    key_name: hubot
+    group: hubot
+    instance_type: t2.small
+    image: ami-c481fad3
+    wait: yes
+    wait_timeout: 600
+    count: 1
+    instance_profile_name: hubot
+    instance_tags:
+      Name: hubot
+    ebs_optimized: no
+    monitoring: no
+    vpc_subnet_id: "{{ prv_subnet.id }}"
+    assign_public_ip: yes
