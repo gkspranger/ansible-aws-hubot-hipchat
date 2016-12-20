@@ -14,9 +14,20 @@ aws_access_key_id = abc123
 aws_secret_access_key = 123abc
 ```
 * You have Ansible and Boto installed locally
-```sh
+```bash
 pip install ansible==2.1.1 boto
 ```
 * You have created a Slack team and a custom Bot user
-  * Make sure to grab the API token
-  
+  * Go learn about Bot users: https://api.slack.com/bot-users
+  * The link above links to "creating a new bot user" .. Go do it !!
+* You have created your own Ansible Vault password file
+  * ~/.ansible_hubot_vault.txt
+* You have created your own ./vars/secrets.yml file
+```bash
+ansible-vault create vars/secrets.yml
+```
+```python
+---
+
+slack_hal_api_token: xyz456
+```
