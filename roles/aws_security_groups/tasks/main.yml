@@ -2,9 +2,8 @@
 
 - name: create basic AWS security groups
   ec2_group:
-    aws_access_key: "{{ aws_api_access_key }}"
-    aws_secret_key: "{{ aws_api_secret_access_key }}"
-    region: us-east-1
+    profile: hubot
+    region: "{{ aws_region }}"
     state: present
     name: "{{ item.name }}"
     description: "{{ item.description }}"
@@ -16,9 +15,8 @@
 
 - name: create complex AWS security groups
   ec2_group:
-    aws_access_key: "{{ aws_api_access_key }}"
-    aws_secret_key: "{{ aws_api_secret_access_key }}"
-    region: us-east-1
+    profile: hubot
+    region: "{{ aws_region }}"
     state: present
     name: "{{ item.name }}"
     description: "{{ item.description }}"
