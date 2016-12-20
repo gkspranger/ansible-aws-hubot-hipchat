@@ -1,0 +1,6 @@
+---
+
+- name: install mysqld server
+  yum: >
+    name=mysql-server
+    state=present

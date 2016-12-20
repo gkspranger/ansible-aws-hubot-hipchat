@@ -7,6 +7,6 @@
     state: present
     name: "{{ project_name }}"
     key_material: "{{ item }}"
-  with_file: custom_rsa.pub
+  with_file: hubot_rsa.pub
   register: aws_key_pairs
   

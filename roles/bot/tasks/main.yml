@@ -1,13 +1,12 @@
 ---
 
-- name: copy coffee scripts
-  template: >
-    src={{ item }}
-    dest=/opt/hubot/scripts/{{ item | basename }}
-    owner=hubot
-    group=hubot
-    mode=0750
+- name: rsync scripts
+  synchronize: >
+    src="{{ playbook_dir }}/roles/bot/templates/scripts/"
+    dest=/opt/hubot/scripts
+    checksum=yes
+    recursive=yes
+    delete=yes
+    rsync_opts="--exclude .git* --exclude .DS_Store*"
   notify: restart hubot
-  with_fileglob: "{{ playbook_dir }}/roles/bot/templates/scripts/*.coffee"
-  tags:
-    - bot_scripts
+  become_user: hubot

@@ -9,15 +9,15 @@
       tags: nodejs
     - role: redis
       tags: redis
+    - role: mysql_server
+      tags: mysql
     - role: hubot
       name: "{{ bot_name }}"
       adapter: slack
-      tags:
-        - hubot
+      tags: hubot
     - role: bot
       name: "{{ bot_name }}"
-      tags:
-        - bot
+      tags: bot
   post_tasks:
     - name: start services
       service: >

@@ -1,5 +1,7 @@
 ---
 
+# ansible-playbook -i inventories/localhost pb_provision.yml
+
 - hosts: localhost
   connection: local
   gather_facts: False
