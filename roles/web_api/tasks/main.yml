@@ -1,0 +1,16 @@
+---
+
+- name: make sure /opt/web2py/applications/hubot exists
+  file: >
+    path=/opt/web2py/applications/hubot
+    state=directory
+    mode=0755
+
+- name: rsync web api
+  synchronize: >
+    src="{{ playbook_dir }}/roles/web_api/templates/"
+    dest=/opt/web2py/applications/hubot/
+    checksum=yes
+    recursive=yes
+    delete=yes
+    rsync_opts="--exclude .git* --exclude .DS_Store*"

@@ -43,6 +43,7 @@ start() {
 
 stop() {
         echo -n $"Shutting down $DESC ($NAME): "
+        deactivate
         killproc -p "$PIDFILE" -d 3 "$NAME"
         echo
         if [ $RETVAL -eq 0 ]; then
