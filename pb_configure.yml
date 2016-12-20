@@ -11,6 +11,8 @@
       tags: redis
     - role: mysql_server
       tags: mysql
+    - role: web2py
+      tags: web2py
     - role: hubot
       name: "{{ bot_name }}"
       adapter: slack
