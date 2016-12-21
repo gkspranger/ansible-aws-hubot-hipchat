@@ -1,8 +1,5 @@
-# Description
-#   Ask {{ name }} who you are
-#
 # Commands:
-#   who am i
+#   hubot who am i
 #
 
 module.exports = (robot) ->
