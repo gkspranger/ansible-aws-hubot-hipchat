@@ -30,3 +30,4 @@
       with_items:
         - redis
         - hubot
+        - web2pyd
