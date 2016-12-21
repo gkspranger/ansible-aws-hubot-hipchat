@@ -31,3 +31,7 @@ ansible-vault create vars/secrets.yml
 
 slack_hal_api_token: xyz456
 ```
+
+### Notes
+* To get the audit script to work, create a new channel named "#botlog" and invite your bot to it
+

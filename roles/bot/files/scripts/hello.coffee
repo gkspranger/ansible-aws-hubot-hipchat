@@ -2,7 +2,6 @@
 #   hubot hello - say hi to your bot
 #   hubot good (night|evening) - say goodbye to your bot
 #   hubot good morning - greet your bot
-#
 
 hellos = [
   "Well hello there, %",
