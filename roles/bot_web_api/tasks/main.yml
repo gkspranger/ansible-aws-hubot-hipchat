@@ -8,7 +8,7 @@
 
 - name: rsync web api
   synchronize: >
-    src="{{ playbook_dir }}/roles/bot_web_api/templates/"
+    src="{{ playbook_dir }}/roles/bot_web_api/files/application/"
     dest=/opt/web2py/applications/bot/
     checksum=yes
     recursive=yes

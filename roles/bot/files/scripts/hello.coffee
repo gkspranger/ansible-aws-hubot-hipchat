@@ -13,7 +13,8 @@ hellos = [
 
 mornings = [
   "Good morning, %",
-  "Good morning to you too, %"
+  "Good morning to you too, %",
+  "Top o' the mornin' to ya, %"
 ]
 
 nights = [
