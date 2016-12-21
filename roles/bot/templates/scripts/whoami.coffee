@@ -7,7 +7,7 @@
 #
 
 module.exports = (robot) ->
-  robot.respond /who am i/i, (msg) ->
+  robot.respond /who am i/i, id: "whoami.who", (msg) ->
     msg.send "your name is %".replace "%", msg.message.user.name
     msg.send "your real name is %".replace "%", msg.message.user.real_name
     msg.send "your id is %".replace "%", msg.message.user.id

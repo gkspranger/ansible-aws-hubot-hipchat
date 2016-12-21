@@ -6,6 +6,14 @@
     dest=/opt/
     creates=/opt/web2py/web2py.py
 
+- name: remove extraneous default apps
+  file: >
+    path="{{ item }}"
+    state=absent
+  with_items:
+    - /opt/web2py/applications/welcome
+    - /opt/web2py/applications/examples
+    
 - name: install needed app libs
   pip: >
     name={{ item.name }}

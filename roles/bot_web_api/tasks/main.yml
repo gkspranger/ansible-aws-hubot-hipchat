@@ -1,15 +1,15 @@
 ---
 
-- name: make sure /opt/web2py/applications/hubot exists
+- name: make sure /opt/web2py/applications/bot exists
   file: >
-    path=/opt/web2py/applications/hubot
+    path=/opt/web2py/applications/bot
     state=directory
     mode=0755
 
 - name: rsync web api
   synchronize: >
-    src="{{ playbook_dir }}/roles/web_api/templates/"
-    dest=/opt/web2py/applications/hubot/
+    src="{{ playbook_dir }}/roles/bot_web_api/templates/"
+    dest=/opt/web2py/applications/bot/
     checksum=yes
     recursive=yes
     delete=yes

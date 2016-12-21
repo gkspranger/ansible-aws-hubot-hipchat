@@ -13,6 +13,8 @@
       tags: mysql
     - role: web2py
       tags: web2py
+    - role: bot_web_api
+      tags: bot_web_api
     - role: hubot
       name: "{{ bot_name }}"
       adapter: slack

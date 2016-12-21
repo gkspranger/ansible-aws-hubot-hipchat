@@ -3,7 +3,7 @@
 - name: rsync scripts
   synchronize: >
     src="{{ playbook_dir }}/roles/bot/templates/scripts/"
-    dest=/opt/hubot/scripts
+    dest=/opt/hubot/scripts/
     checksum=yes
     recursive=yes
     delete=yes

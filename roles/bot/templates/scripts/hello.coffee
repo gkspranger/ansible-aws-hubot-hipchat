@@ -3,7 +3,7 @@
 #   Say "hello" or "good morning" to {{ name }}
 #
 # Commands:
-#   (hello|(good )?morning)
+#   (good )?(night|evening)
 #
 
 hellos = [
@@ -17,11 +17,22 @@ mornings = [
   "Good morning to you too, %"
 ]
 
+nights = [
+  "Good night, %",
+  "Good night to you too, %",
+  "Good evening, %",
+  "Good evening to you too, %"
+]
+
 module.exports = (robot) ->
-  robot.respond /hello/i, (msg) ->
+  robot.respond /hello/i, id: "hello.hello", (msg) ->
     back = msg.random hellos
     msg.send back.replace "%", msg.message.user.name
     
-  robot.respond /(good )?morning/i, (msg) ->
+  robot.respond /(good )?morning/i, id: "hello.morning", (msg) ->
     back = msg.random mornings
+    msg.send back.replace "%", msg.message.user.name
+
+  robot.respond /(good )?(night|evening)/i, id: "hello.night", (msg) ->
+    back = msg.random nights
     msg.send back.replace "%", msg.message.user.name
