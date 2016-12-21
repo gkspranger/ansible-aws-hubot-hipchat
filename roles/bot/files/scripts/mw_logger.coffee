@@ -1,4 +1,3 @@
-# {{ cfg_managed }}
 # Description
 #   Logs every command executed and by whom
 #

@@ -1,4 +1,3 @@
-# {{ cfg_managed }}
 # Description
 #   Say "hello" or "good morning" to {{ name }}
 #

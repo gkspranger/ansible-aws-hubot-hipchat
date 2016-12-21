@@ -1,4 +1,3 @@
-# {{ cfg_managed }}
 # Description
 #   Ask {{ name }} who you are
 #
