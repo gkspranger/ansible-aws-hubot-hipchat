@@ -13,4 +13,7 @@
     checksum=yes
     recursive=yes
     delete=yes
+    owner=no
+    group=no
+    times=no
     rsync_opts="--exclude .git* --exclude .DS_Store*"

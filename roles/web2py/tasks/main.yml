@@ -30,3 +30,12 @@
     owner=root
     group=root
     mode=0755
+
+- name: config /opt/web2py/logging.conf
+  template: >
+    src=logging.conf
+    dest=/opt/web2py/logging.conf
+    owner=root
+    group=root
+    mode=0644
+

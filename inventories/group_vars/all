@@ -9,3 +9,5 @@ bot_name: hal
 cfg_managed: This is a custom file that is managed by Ansible
 
 project_name: hubot
+
+mysql_root_password: kasdlk90098a0d98as0lkajlkasjd908098asd

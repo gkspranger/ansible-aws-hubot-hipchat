@@ -4,3 +4,28 @@
   yum: >
     name=mysql-server
     state=present
+
+- name: enable mysqld service
+  service: >
+    name=mysqld
+    state=started
+    enabled=True
+    
+- name: perform secure installation
+  shell: |
+    mysqladmin -u root password "{{ mysql_root_password }}"
+    mysql -u root -p"{{ mysql_root_password }}" -e "UPDATE mysql.user SET password=PASSWORD('{{ mysql_root_password }}') WHERE user='root'"
+    mysql -u root -p"{{ mysql_root_password }}" -e "DELETE FROM mysql.user WHERE user='root' AND host NOT IN ('localhost', '127.0.0.1', '::1')"
+    mysql -u root -p"{{ mysql_root_password }}" -e "DELETE FROM mysql.user WHERE user=''"
+    mysql -u root -p"{{ mysql_root_password }}" -e "DELETE FROM mysql.db WHERE db='test' OR db='test\_%'"
+    mysql -u root -p"{{ mysql_root_password }}" -e "DROP DATABASE test"
+    mysql -u root -p"{{ mysql_root_password }}" -e "FLUSH PRIVILEGES"
+    mysql -u root -p"{{ mysql_root_password }}" -e "CREATE DATABASE IF NOT EXISTS bot"
+    touch /var/lib/mysql/safe_install.DONOTREMOVE
+  args:
+    creates: /var/lib/mysql/safe_install.DONOTREMOVE
+    
+- name: setup .my.cnf for easy connection
+  template: >
+    src=dot_my.cnf
+    dest=/root/.my.cnf
