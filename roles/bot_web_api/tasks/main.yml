@@ -1,0 +1,19 @@
+---
+
+- name: make sure /opt/web2py/applications/bot exists
+  file: >
+    path=/opt/web2py/applications/bot
+    state=directory
+    mode=0755
+
+- name: rsync web api
+  synchronize: >
+    src="{{ playbook_dir }}/roles/bot_web_api/files/application/"
+    dest=/opt/web2py/applications/bot/
+    checksum=yes
+    recursive=yes
+    delete=yes
+    owner=no
+    group=no
+    times=no
+    rsync_opts="--exclude .git* --exclude .DS_Store*"

@@ -1,0 +1,41 @@
+---
+  
+- name: unarchive it so we can use it
+  unarchive: >
+    src="{{ playbook_dir }}/roles/web2py/files/web2py_src.zip"
+    dest=/opt/
+    creates=/opt/web2py/web2py.py
+
+- name: remove extraneous default apps
+  file: >
+    path="{{ item }}"
+    state=absent
+  with_items:
+    - /opt/web2py/applications/welcome
+    - /opt/web2py/applications/examples
+    
+- name: install needed app libs
+  pip: >
+    name={{ item.name }}
+    version={{ item.version | default(omit) }}
+    virtualenv=/opt/venv_web2py
+  with_items:
+    - name: boto
+    - name: boto3
+
+- name: config /etc/init.d/web2pyd
+  template: >
+    src=web2pyd
+    dest=/etc/init.d/web2pyd
+    owner=root
+    group=root
+    mode=0755
+
+- name: config /opt/web2py/logging.conf
+  template: >
+    src=logging.conf
+    dest=/opt/web2py/logging.conf
+    owner=root
+    group=root
+    mode=0644
+
