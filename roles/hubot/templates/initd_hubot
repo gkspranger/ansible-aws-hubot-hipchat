@@ -6,24 +6,24 @@
 
 # {{ cfg_managed }}
 
-# This script assumes you have a user called "hubot" on your system and that hubot is installed in /opt/hubot
+# This script assumes you have a user called "{{ name }}" on your system and that hubot is installed in /opt/{{ name }}
 
-# Save Environement Variables in /opt/hubot/hubot.env
-HUBOT_VARS=/opt/hubot/hubot.env
+# Save Environement Variables in /opt/{{ name }}/hubot.env
+HUBOT_VARS=/opt/{{ name }}/hubot.env
 
-DAEMON="/opt/hubot/bin/hubot.sh"
+DAEMON="/opt/{{ name }}/bin/hubot.sh"
 DAEMONOPTS="--name {{ name }} --adapter {{ adapter }}"
 
-NAME=hubot
-USER=hubot
-DESC="hubot"
+NAME={{ name }}
+USER={{ name }}
+DESC="{{ name }}"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
 case "$1" in
     start)
         printf "%-50s" "Starting $DESC..."
-        PID=`runuser -c ". $HUBOT_VARS && cd /opt/hubot && $DAEMON $DAEMONOPTS" - $USER  >> /var/log/hubot.log 2>&1 & echo $!`
+        PID=`runuser -c ". $HUBOT_VARS && cd /opt/{{ name }} && $DAEMON $DAEMONOPTS" - $USER  >> /var/log/{{ name }}.log 2>&1 & echo $!`
         echo $PID > /var/run/$NAME.pid
         if [ -z $PID ]; then
             printf "%s\n" "Fail"
@@ -47,7 +47,7 @@ case "$1" in
     ;;
     stop)
         printf "%s\n" "Stopping $DESC"
-        for pid in $( ps aux | grep "/opt/hubot" | grep -v grep | awk '{print $2}' ); do
+        for pid in $( ps aux | grep "/opt/{{ name }}" | grep -v grep | awk '{print $2}' ); do
             kill -9 $pid
         done
         rm -fr $PIDFILE

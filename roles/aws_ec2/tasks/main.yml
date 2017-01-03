@@ -6,21 +6,21 @@
 
 - name: provision node
   ec2:
-    profile: hubot
+    profile: bot
     region: "{{ aws_region }}"
-    key_name: "{{ project_name }}"
+    key_name: bot
     groups:
       - ssh
     instance_type: t2.small
     image: "{{ aws_ami }}"
     wait: yes
     wait_timeout: 600
-    instance_profile_name: "{{ project_name }}"
+    instance_profile_name: bot
     instance_tags:
-      Name: "{{ project_name }}"
+      Name: bot
     exact_count: 1
     count_tag:
-      Name: "{{ project_name }}"
+      Name: bot
     ebs_optimized: no
     monitoring: no
     vpc_subnet_id: "{{ prv_subnet.id }}"

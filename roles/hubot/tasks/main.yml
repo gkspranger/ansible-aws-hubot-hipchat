@@ -2,14 +2,14 @@
 
 - name: add hubot group
   group: >
-    name=hubot
+    name="{{ name }}"
     state=present
 
 - name: add hubot user
   user: >
-    name=hubot
-    group=hubot
-    home=/opt/hubot
+    name="{{ name }}"
+    group="{{ name }}"
+    home="/opt/{{ name }}"
     state=present
 
 - name: install coffee-script
@@ -20,27 +20,27 @@
 - name: install hubot and slack adapter
   npm: >
     name={{ item }}
-    path=/opt/hubot
-  become_user: hubot
+    path="/opt/{{ name }}"
+  become_user: "{{ name }}"
   with_items:
     - hubot
     - hubot-slack
 
-- name: config DIRs /opt/hubot
+- name: config DIRs /opt/<name>
   file: >
-    path=/opt/hubot/{{ item }}
+    path="/opt/{{ name }}/{{ item }}"
     state=directory
-    owner=hubot
-    group=hubot
+    owner="{{ name }}"
+    group="{{ name }}"
     mode=0755
   with_items:
     - bin
     - scripts
 
-- name: config /etc/init.d/hubot
+- name: config /etc/init.d/<name>
   template: >
     src=initd_hubot
-    dest=/etc/init.d/hubot
+    dest="/etc/init.d/{{ name }}"
     owner=root
     group=root
     mode=0755
@@ -48,26 +48,25 @@
 - name: config /opt/hubot/*
   template: >
     src="{{ item }}"
-    dest=/opt/hubot/{{ item }}
-    owner=hubot
-    group=hubot
+    dest="/opt/{{ name }}/{{ item }}"
+    owner="{{ name }}"
+    group="{{ name }}"
     mode=0644
-  notify: restart hubot
+  notify: restart hal
   with_items:
     - hubot.env
 
-- name: config /opt/hubot/bin/*
+- name: config /opt/<name>/bin/hubot.sh
   template: >
-    src="{{ item }}"
-    dest=/opt/hubot/bin/{{ item }}
-    owner=hubot
-    group=hubot
+    src=hubot.sh
+    dest="/opt/{{ name }}/bin/hubot.sh"
+    owner="{{ name }}"
+    group="{{ name }}"
     mode=0755
-  notify: restart hubot
-  with_items:
-    - hubot.sh
+  notify: restart hal
 
 - name: enable hubot service
   service: >
-    name=hubot
+    name="{{ name }}"
     enabled=True
+    

@@ -1,0 +1,15 @@
+---
+
+- name: rsync scripts
+  synchronize: >
+    src="{{ playbook_dir }}/roles/jarvis/files/scripts/"
+    dest=/opt/jarvis/scripts/
+    checksum=yes
+    recursive=yes
+    delete=yes
+    owner=no
+    group=no
+    times=no
+    rsync_opts="--exclude .git* --exclude .DS_Store*"
+  notify: restart jarvis
+  become_user: jarvis

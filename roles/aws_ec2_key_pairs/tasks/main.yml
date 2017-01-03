@@ -2,11 +2,11 @@
 
 - name: key pair
   ec2_key:
-    profile: hubot
+    profile: bot
     region: "{{ aws_region }}"
     state: present
-    name: "{{ project_name }}"
+    name: bot
     key_material: "{{ item }}"
-  with_file: hubot_rsa.pub
+  with_file: bot_rsa.pub
   register: aws_key_pairs
   

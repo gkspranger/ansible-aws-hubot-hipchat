@@ -4,8 +4,6 @@ aws_ami: ami-b73b63a0
 aws_az: us-east-1b
 aws_region: us-east-1
 
-bot_name: hal
-
 cfg_managed: This is a custom file that is managed by Ansible
 
 project_name: hubot

@@ -2,16 +2,16 @@
 
 - name: creating vpc
   ec2_vpc:
-    profile: hubot
+    profile: bot
     region: "{{ aws_region }}"
     state: present
     cidr_block: 10.10.0.0/16
     resource_tags:
-      Name: "{{ project_name }}"
+      Name: bot
     subnets:
       - cidr: 10.10.1.0/24
         az: "{{ aws_az }}"
-        resource_tags: { "Name" : "{{ project_name }}_{{ aws_az }}" }
+        resource_tags: { "Name" : "bot_{{ aws_az }}" }
     internet_gateway: True
     route_tables:
       - subnets:
@@ -20,5 +20,5 @@
           - dest: 0.0.0.0/0
             gw: igw
         resource_tags:
-          Name: "{{ project_name }}"
+          Name: bot
   register: aws_vpc

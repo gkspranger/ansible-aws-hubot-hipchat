@@ -1,6 +1,6 @@
 ---
 
-- name: restart hubot
+- name: "restart {{ bot_name }}"
   service: >
-    name=hubot
+    name="{{ bot_name }}"
     state=restarted

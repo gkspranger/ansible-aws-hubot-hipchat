@@ -2,8 +2,8 @@
 
 - name: Create IAM role with custom trust relationship
   iam:
-    profile: hubot
-    name: "{{ project_name }}"
+    profile: bot
+    name: bot
     iam_type: role
     state: present
   register: aws_iam_roles

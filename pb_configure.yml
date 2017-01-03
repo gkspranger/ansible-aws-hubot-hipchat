@@ -1,27 +1,44 @@
 ---
 
-- hosts: tag_Name_hubot
+- hosts: tag_Name_bot
   vars_files:
     - vars/secrets.yml
   become: True
+  handlers:
+    # for every bot name, you need a custom bot handler
+    - name: restart hal
+      service: >
+        name=hal
+        state=restarted
+    - name: restart jarvis
+      service: >
+        name=jarvis
+        state=restarted
   roles:
-    - role: nodejs_4
+    - role: nodejs_6
       tags: nodejs
     - role: redis
       tags: redis
     - role: mysql_server
       tags: mysql
-    - role: web2py
-      tags: web2py
-    - role: bot_web_api
-      tags: bot_web_api
     - role: hubot
-      name: "{{ bot_name }}"
+      name: hal
       adapter: slack
-      tags: hubot
-    - role: bot
-      name: "{{ bot_name }}"
-      tags: bot
+      log_level: debug
+      tags:
+        - hubot
+        - hal
+    - role: hal
+      tags: hal
+    - role: hubot
+      name: jarvis
+      adapter: slack
+      port: 8081
+      tags:
+        - hubot
+        - jarvis
+    - role: jarvis
+      tags: jarvis
   post_tasks:
     - name: start services
       service: >
@@ -29,6 +46,6 @@
         state=started
       with_items:
         - redis
-        - hubot
+        - hal
+        - jarvis
         - mysqld
-        - web2pyd
