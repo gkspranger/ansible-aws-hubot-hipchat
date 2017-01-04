@@ -1,0 +1,11 @@
+---
+
+- name: terminate bot instances
+  local_action:
+    module: ec2
+    profile: bot
+    region: us-east-1
+    state: absent
+    instance_ids: "{{ hostvars[item].ansible_ec2_instance_id }}"
+  with_items: "{{ groups.tag_Name_bot | default([]) }}"
+  become: False

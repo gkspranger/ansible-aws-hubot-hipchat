@@ -1,0 +1,13 @@
+---
+
+- hosts: tag_Name_bot
+  become: True
+  gather_facts: False
+  roles:
+    - role: setup
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  roles:
+    - role: teardown
