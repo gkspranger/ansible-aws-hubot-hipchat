@@ -25,6 +25,7 @@
   with_items:
     - hubot
     - hubot-slack
+    - mysql
 
 - name: config DIRs /opt/<name>
   file: >
